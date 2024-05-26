@@ -30,6 +30,7 @@ body {
   max-width: 80vw;
   margin: 0 auto;
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 4rem;
 }
@@ -50,6 +51,49 @@ p {
   color: white;
   font-size: 1.05rem;
   opacity: 90%;
+}
+
+label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_error_text {
+  color: red;
+  font-size: 14px;
+  text-align: right;
+  margin-top: 2px;
+}
+
+.error_circle {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background-color: var(--red);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 24px;
+}
+
+.reveal {
+  width: 23px;
+  height: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none;
 }
 
 h4 {
@@ -77,7 +121,7 @@ input {
   display: block;
   width: 100%;
   padding: 1rem 1.5rem;
-  margin-bottom: 1.2rem;
+  /* margin-bottom: 1.2rem; */
   border: 1px solid var(--grayish-blue);
   border-radius: 0.5rem;
   font-family: inherit;
@@ -86,8 +130,13 @@ input {
   transition: all 0.2s ease-in-out;
 }
 
+.form_control {
+  margin-bottom: 1.2rem;
+}
+
 input.error {
   border: 1px solid var(--red);
+  color: var(--red)
 }
 
 input:hover,
@@ -121,4 +170,13 @@ small span {
   color: var(--red);
   font-weight: 600;
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+
 }

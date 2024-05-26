@@ -1,55 +1,80 @@
-const form = document.getElementById('form');
-const button = document.getElementById('button');
-const firstName = document.querySelector('.firstName');
-const lastName = document.querySelector('.lastName');
-const email = document.querySelector('.email');
-const password = document.querySelector('.password');
+// using the id to get my button element
+const claimButton = document.getElementById("button");
+// get all the fields in here
+const firstName = document.querySelector(".firstName");
+const lastName = document.querySelector(".lastName");
+const email = document.querySelector(".email");
+const password = document.querySelector(".password");
+const revealPassword = document.querySelector(".reveal");
 
-console.log(firstName);
+const form_error_text = document.querySelectorAll(".form_error_text");
+const error_circles = document.querySelectorAll(".error_circle");
 
-// console.log(firstName, lastName, email, password);
+// using class to get my button element
 
-form.addEventListener('submit', (e) => {
+// add event listeners to the claim button
+claimButton.addEventListener("click", (e) => {
+  // prevent auto refresh
   e.preventDefault();
+  // get all the value entered by the user
   const fName = firstName.value;
   const lName = lastName.value;
-  const emailVal = email.value;
-  const passwordVal = password.value;
-  console.log(fName, lName, emailVal, passwordVal);
+  const eMail = email.value;
+  const pwd = password.value;
 
-  // Check first name
-  if (fName === '') {
-    firstName.classList.add('error');
+  // check if all the fields are empty
+  if (fName === "") {
+    firstName.classList.add("error");
+    form_error_text[0].classList.remove("hide");
+    error_circles[0].classList.remove("hide");
   } else {
-    firstName.classList.remove('error');
-  }
-  // Check last name
-
-  if (lName === '') {
-    lastName.classList.add('error');
-  } else {
-    lastName.classList.remove('error');
-  }
-  // Check email
-
-  if (!validateEmail(emailVal) || emailVal === '') {
-    email.classList.add('error');
-  } else {
-    email.classList.remove('error');
+    firstName.classList.remove("error");
+    form_error_text[0].classList.add("hide");
+    error_circles[0].classList.add("hide");
   }
 
-  // Check password
-
-  if (passwordVal === '') {
-    password.classList.add('error');
+  if (lName === "") {
+    lastName.classList.add("error");
+    form_error_text[1].classList.remove("hide");
+    error_circles[1].classList.remove("hide");
   } else {
-    password.classList.remove('error');
+    lastName.classList.remove("error");
+    form_error_text[1].classList.add("hide");
+    error_circles[1].classList.add("hide");
+  }
+
+  if (!validateEmail(eMail) || eMail === "") {
+    email.classList.add("error");
+    form_error_text[2].classList.remove("hide");
+    error_circles[2].classList.remove("hide");
+  } else {
+    email.classList.remove("error");
+    form_error_text[2].classList.add("hide");
+    error_circles[2].classList.add("hide");
+  }
+
+  if (pwd === "") {
+    password.classList.add("error");
+    form_error_text[3].classList.remove("hide");
+    error_circles[3].classList.remove("hide");
+    revealPassword.classList.add("hide");
+  } else {
+    password.classList.remove("error");
+    form_error_text[3].classList.add("hide");
+    error_circles[3].classList.add("hide");
   }
 });
 
-//Validate email
 function validateEmail(email) {
   var re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+revealPassword.addEventListener("click", () => {
+  if (password.type === "text") {
+    password.type = "password";
+  } else {
+    password.type = "text";
+  }
+});
